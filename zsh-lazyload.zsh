@@ -1,26 +1,22 @@
-declare -gA _lazyload
-function lazyload {
-  if [[ $1 == ':' ]]
-  then
-    shift
-    local cmd=$funcstack[2]
-    unfunction $cmd
-    local load_cmd=${_lazyload[$cmd]}
-    eval $load_cmd
-    $cmd $@
-  else
+function lazyload {  
     local seperator='--'
-    local seperator_index=${@[(ie)--]}
+    local seperator_index=${@[(ie)$seperator]}
     local cmd_list=(${@:1:(($seperator_index - 1))}); 
-    local load_cmd=${@[(($seperator_index + 1))]};
-    local cmd
-    for cmd in $cmd_list
-    do
-      _lazyload[$cmd]=$load_cmd
-      function $cmd {
-        lazyload : $@
-      }
-    done
-  fi
+    local load_cmd=${@[(($seperator_index + 1))]};    
+    if (( ${cmd_list[(I)${funcstack[2]}]} ))
+    then
+      unfunction $cmd_list
+      eval "$load_cmd"
+    else
+      local cmd
+      for cmd in $cmd_list
+      do
+        eval "function $cmd {
+          lazyload $cmd_list \
+            -- ${(qqqq)load_cmd}
+          $cmd \"\$@\"
+        }"
+      done
+    fi
 }
 
