@@ -20,8 +20,7 @@ function lazyload {
     for cmd in $cmd_list
     do
       eval "function $cmd {
-        lazyload $cmd_list \
-          -- ${(qqqq)load_cmd}
+        lazyload $cmd_list -- ${(qqqq)load_cmd}
         $cmd \"\$@\"
       }"
     done
