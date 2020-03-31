@@ -27,7 +27,7 @@ antigen apply
 ### [Oh My ZSH! custom plugin](http://ohmyz.sh/)
 ```
 git clone https://github.com/qoomon/zsh-lazyload $ZSH_CUSTOM/plugins/zsh-lazyload
-plugins+=(k)
+plugins+=(zsh-lazyload)
 ```
 ### [zplug](https://github.com/zplug/zplug)
 `zplug "qoomon/zsh-lazyload"`
