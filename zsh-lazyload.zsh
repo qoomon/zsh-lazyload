@@ -11,22 +11,21 @@ function lazyload {
     return 1
   fi
   
-  # eval load command if lazyload was called by placeholder function
+  # check if lazyload was called by placeholder function
   if (( ${cmd_list[(I)${funcstack[2]}]} ))
   then
     unfunction $cmd_list
     eval "$load_cmd"
   else
     # create placeholder function for each command
+    # ${(qqqq)VAR} will quote VAR value as $'...'
     local cmd
     for cmd in $cmd_list
     do
-      # ${(qqqq)foo} will quote foo value as $'...'
       eval "function $cmd {
-        lazyload $cmd_list -- ${(qqqq)load_cmd}
+        lazyload $cmd_list $seperator ${(qqqq)load_cmd}
         $cmd \"\$@\"
       }"
     done
   fi
 }
-
