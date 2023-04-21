@@ -4,28 +4,20 @@ function lazyload {
   local cmd_list=(${@:1:(($seperator_index - 1))}); 
   local load_cmd=${@[(($seperator_index + 1))]};   
    
-  if [[ ! $load_cmd ]]
-  then
+  if [[ ! $load_cmd ]]; then
     >&2 echo "[ERROR] lazyload: No load command defined"
     >&2 echo "  $@"
     return 1
   fi
   
   # check if lazyload was called by placeholder function
-  if (( ${cmd_list[(Ie)${funcstack[2]}]} ))
-  then
+  if (( ${cmd_list[(Ie)${funcstack[2]}]} )); then
     unfunction $cmd_list
     eval "$load_cmd"
   else
     # create placeholder function for each command
     local cmd
-    for cmd in $cmd_list
-    do
-      eval "function $cmd {
-        lazyload $cmd_list $seperator ${(qqqq)load_cmd}
-        $cmd \"\$@\"
-      }"
-    done
+    for cmd in $cmd_list; eval "function $cmd { lazyload $cmd_list $seperator ${(qqqq)load_cmd} && $cmd \"\$@\" }"
   fi
 }
 
