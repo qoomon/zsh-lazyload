@@ -12,13 +12,12 @@ function lazyload {
   fi
   
   # check if lazyload was called by placeholder function
-  if (( ${cmd_list[(I)${funcstack[2]}]} ))
+  if (( ${cmd_list[(Ie)${funcstack[2]}]} ))
   then
     unfunction $cmd_list
     eval "$load_cmd"
   else
     # create placeholder function for each command
-    # ${(qqqq)VAR} will quote VAR value as $'...'
     local cmd
     for cmd in $cmd_list
     do
@@ -29,3 +28,9 @@ function lazyload {
     done
   fi
 }
+
+### Notes ###
+# ${funcstack[2]}      resolves to the caller function name
+# ${ARRAY[(Ie)$value]} resolves to the index of the VALUE within the ARRAY (I - Index; e - exact match, no pattern match)
+# (($NUMBER))          resolves to false for NUMBER 0, else true
+# ${(qqqq)VAR}         resolves to quoted value in the format of $'...'
