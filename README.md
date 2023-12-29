@@ -7,7 +7,9 @@ zsh plugin for lazy load commands and speed up start up time of zsh
 `lazyload command_name [command_name...] -- load_command`
 
 #### Examples
-`lazyload nvm -- 'source "$(brew --prefix nvm)/nvm.sh"'`
+##### `nvm`
+- `lazyload nvm -- 'source ~/.nvm/nvm.sh'`
+- `lazyload nvm -- 'source "$(brew --prefix nvm)/nvm.sh"'`
 
 ## Install
 
