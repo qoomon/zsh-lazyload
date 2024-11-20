@@ -1,4 +1,4 @@
-# zsh-lazyload [![starline](https://github-starline.vercel.app/qoomon/zsh-lazyload)](https://github.com/qoomon/starline)
+# zsh-lazyload [![starline](https://starlines.qoo.monster/assets/qoomon/zsh-lazyload)](https://github.com/qoomon/starlines)
 
 zsh plugin for lazy load commands and speed up start up time of zsh
 
