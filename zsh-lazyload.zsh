@@ -3,7 +3,8 @@ function lazyload {
   local seperator_index=${@[(ie)$seperator]}
   local cmd_list=(${@:1:(($seperator_index - 1))}); 
   local load_cmd=${@[(($seperator_index + 1))]};   
-   
+
+  # verify arguments
   if [[ ! $load_cmd ]]; then
     >&2 echo "[ERROR] lazyload: No load command defined"
     >&2 echo "  $@"
