@@ -14,8 +14,6 @@ zsh plugin for lazy load commands and speed up start up time of zsh
 
 ### [zgem](https://github.com/qoomon/zgem)
 `zgem bundle 'https://github.com/qoomon/zsh-lazyload.git' from:'git' use:'zsh-lazyload.zsh'`
-### [zplug](https://github.com/zdharma/zplugin)
-`zplug qoomon/zsh-lazyload`
 ### [zgen](https://github.com/tarjoilija/zgen)
 ```
 zgen load qoomon/zsh-lazyload
